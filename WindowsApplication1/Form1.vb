@@ -6,7 +6,7 @@ Imports System.IO
 Public Class Form1
     Private startCorner As Point
     Private rubberBand As Rectangle
-    Private rubberBandColor As Color = Color.Yellow
+    Private rubberBandColor As Color = Color.Red
     Private rubberBanding As Boolean = False
 
     Dim finishX, finishY As Integer
@@ -75,8 +75,6 @@ Public Class Form1
         g = PictureBox1.CreateGraphics
 
         objNewBmp.Save("c:\temp\s" & ".tif", Imaging.ImageFormat.Tiff)
-
-
     End Sub
 
 
@@ -138,11 +136,13 @@ Public Class Form1
             'Creates an rectagnle on the picture box for visual.
             g = PictureBox1.CreateGraphics
             g.FillRectangle(b, DrawRect)
+            g.Dispose()
             objNewBmp.Save("c:\temp\s" & ".tif", Imaging.ImageFormat.Tiff)
             PictureBox1.Image = objNewBmp
             'cboFrameEdit.Items.Add(curF)
-            'g.Dispose()
+            g.Dispose()
             'objNewBmp.Dispose()
+
             rubberBanding = False
         End If
     End Sub
