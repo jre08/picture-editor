@@ -2,6 +2,7 @@
 Imports System.Drawing.Drawing2D
 Imports System.Drawing.Imaging
 Imports System.IO
+Imports Spire.Pdf
 
 Public Class Form1
     Private startCorner As Point
@@ -19,17 +20,19 @@ Public Class Form1
     Dim pn As Pen
 
     Private Sub OpenFile_FileOk(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles OpenFile.FileOk
-        ' Dim pic As Image = New Bitmap(OpenFile.FileName)
-        'Dim original As Image = Image.FromFile("C:\temp\0.tif")
-        Dim original As Image = Image.FromFile(OpenFile.FileName)
 
+        '##  Open image file(tiff,jpg,bmp)
+        Dim original As Image = Image.FromFile(OpenFile.FileName)
         Dim resized As Image = ResizeImage(original, New Size(PictureBox1.Width, PictureBox1.Height))
         Dim memStream As MemoryStream = New MemoryStream()
         resized.Save(memStream, ImageFormat.Tiff)
-
-
-
         PictureBox1.Image = resized
+
+        '##Open pdf
+        'LOADPDF(OpenFile.FileName)
+
+
+
     End Sub
 
     Private Sub PictureBox1_Click(sender As Object, e As MouseEventArgs) Handles PictureBox1.DoubleClick
@@ -152,4 +155,6 @@ Public Class Form1
             e.Graphics.DrawRectangle(pn, rubberBand)
         End Using
     End Sub
+
+
 End Class
