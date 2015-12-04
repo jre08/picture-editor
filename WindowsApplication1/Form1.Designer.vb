@@ -23,13 +23,13 @@ Partial Class Form1
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("new")
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.OpenFile = New System.Windows.Forms.OpenFileDialog()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.ListView1 = New System.Windows.Forms.ListView()
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.ListView1 = New System.Windows.Forms.ListView()
+        Me.Button3 = New System.Windows.Forms.Button()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -54,23 +54,37 @@ Partial Class Form1
         Me.Button1.Text = "Button1"
         Me.Button1.UseVisualStyleBackColor = True
         '
-        'ListView1
-        '
-        Me.ListView1.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
-        Me.ListView1.LargeImageList = Me.ImageList1
-        Me.ListView1.Location = New System.Drawing.Point(515, 41)
-        Me.ListView1.Name = "ListView1"
-        Me.ListView1.Size = New System.Drawing.Size(270, 511)
-        Me.ListView1.SmallImageList = Me.ImageList1
-        Me.ListView1.TabIndex = 2
-        Me.ListView1.TileSize = New System.Drawing.Size(16, 16)
-        Me.ListView1.UseCompatibleStateImageBehavior = False
-        '
         'ImageList1
         '
-        Me.ImageList1.ImageStream = CType(resources.GetObject("ImageList1.ImageStream"), System.Windows.Forms.ImageListStreamer)
+        Me.ImageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth24Bit
+        Me.ImageList1.ImageSize = New System.Drawing.Size(128, 128)
         Me.ImageList1.TransparentColor = System.Drawing.Color.Transparent
-        Me.ImageList1.Images.SetKeyName(0, "BGInfo.bmp")
+        '
+        'Button2
+        '
+        Me.Button2.Location = New System.Drawing.Point(515, 41)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(75, 23)
+        Me.Button2.TabIndex = 1
+        Me.Button2.Text = "Button1"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
+        'ListView1
+        '
+        Me.ListView1.Location = New System.Drawing.Point(515, 70)
+        Me.ListView1.Name = "ListView1"
+        Me.ListView1.Size = New System.Drawing.Size(294, 470)
+        Me.ListView1.TabIndex = 2
+        Me.ListView1.UseCompatibleStateImageBehavior = False
+        '
+        'Button3
+        '
+        Me.Button3.Location = New System.Drawing.Point(596, 12)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(75, 23)
+        Me.Button3.TabIndex = 1
+        Me.Button3.Text = "Button1"
+        Me.Button3.UseVisualStyleBackColor = True
         '
         'Form1
         '
@@ -78,6 +92,8 @@ Partial Class Form1
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1008, 730)
         Me.Controls.Add(Me.ListView1)
+        Me.Controls.Add(Me.Button3)
+        Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.PictureBox1)
         Me.Name = "Form1"
@@ -90,6 +106,8 @@ Partial Class Form1
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents OpenFile As OpenFileDialog
     Friend WithEvents Button1 As Button
-    Friend WithEvents ListView1 As ListView
     Friend WithEvents ImageList1 As ImageList
+    Friend WithEvents Button2 As Button
+    Friend WithEvents ListView1 As ListView
+    Friend WithEvents Button3 As Button
 End Class

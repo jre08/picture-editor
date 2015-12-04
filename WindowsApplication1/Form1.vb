@@ -18,21 +18,49 @@ Public Class Form1
     Dim strFileName As String
     Dim g As Graphics
     Dim pn As Pen
+    Dim totalPages As Integer
+    Dim currentPage As Integer = 0
+    Dim fs As FileStream
+    Dim srcBmp As Bitmap
+    Dim resized As Image
 
-    Private Sub OpenFile_FileOk(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles OpenFile.FileOk
+
+
+    Public Sub OpenFile_FileOk(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles OpenFile.FileOk
 
         '##  Open image file(tiff,jpg,bmp)
-        Dim original As Image = Image.FromFile(OpenFile.FileName)
-        Dim resized As Image = ResizeImage(original, New Size(PictureBox1.Width, PictureBox1.Height))
-        Dim memStream As MemoryStream = New MemoryStream()
-        resized.Save(memStream, ImageFormat.Tiff)
-        PictureBox1.Image = resized
+        'Dim original As Image = Image.FromFile(OpenFile.FileName)
+        'resized = ResizeImage(original, New Size(PictureBox1.Width, PictureBox1.Height))
+        'Dim memStream As MemoryStream = New MemoryStream()
+        'resized.Save(memStream, ImageFormat.Tiff)
+        'PictureBox1.Image = resized
+
+
+
+        fs = File.Open(OpenFile.FileName, FileMode.Open, FileAccess.Read)
+        srcBmp = CType(Bitmap.FromStream(fs), Bitmap)
+        totalPages = CInt(srcBmp.GetFrameCount(FrameDimension.Page) - 1)
+        'srcBmp.SelectActiveFrame(FrameDimension.Page, currentPage)
+        'MsgBox(srcBmp.GetFrameCount(FrameDimension.Page))
+
+        For i = 0 To totalPages
+            srcBmp.SelectActiveFrame(FrameDimension.Page, i)
+            'srcBmp.totalWidth = Math.Max(totalWidth, (iFile.Width * 0.4))
+            'imageStructure.totalHeight += (iFile.Height * 0.4)
+            resized = New Bitmap(srcBmp, srcBmp.Width * 0.4, srcBmp.Height * 0.4)
+            ListView1.Items.Add(Str(i), Str(i), i)
+            ImageList1.Images.Add(i, resized)
+
+        Next
+        ListView1.LargeImageList = ImageList1
+        PictureBox1.Image = ImageList1.Images.Item(0)
+
+        'resized = ResizeImage(srcBmp, New Size(PictureBox1.Width, PictureBox1.Height))
+        'PictureBox1.Image = resized
+
 
         '##Open pdf
         'LOADPDF(OpenFile.FileName)
-
-
-
     End Sub
 
     Private Sub PictureBox1_Click(sender As Object, e As MouseEventArgs) Handles PictureBox1.DoubleClick
@@ -73,11 +101,18 @@ Public Class Form1
         g = Graphics.FromImage(objNewBmp)
         'Creats a duplicate image file as bitmap format 
 
-
         'Creates an rectagnle on the picture box for visual.
         g = PictureBox1.CreateGraphics
 
         objNewBmp.Save("c:\temp\s" & ".tif", Imaging.ImageFormat.Tiff)
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        thumbnail()
+    End Sub
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        PictureBox1.Image = ImageList1.Images.Item(1)
+
     End Sub
 
 
@@ -99,6 +134,13 @@ Public Class Form1
             rubberBand.Y = Math.Min(e.Y, startCorner.Y)
             PictureBox1.Invalidate()
         End If
+    End Sub
+
+    Private Sub ListView1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListView1.SelectedIndexChanged
+        For Each item As ListViewItem In ListView1.SelectedItems()
+            'MsgBox(item.Text)
+            PictureBox1.Image = ImageList1.Images.Item(item.ImageIndex)
+        Next
     End Sub
 
     Private Sub PictureBox1_MouseUp(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles PictureBox1.MouseUp
@@ -157,4 +199,67 @@ Public Class Form1
     End Sub
 
 
+
+    Sub thumbnail()
+        'Select Case isDelete
+        'Case True
+        'Dim objImage As System.Drawing.Image = objImage.FromFile(strFilePath)
+        'Case False
+        'Dim objImage As System.Drawing.Image = objImage.FromFile(strPath & curF & ".tif")
+        'End Select
+        'Dim objImage As Image
+        Dim totFrame As Integer
+        Dim objImage As Image
+        ' MsgBox(PictureBox1.ImageLocation)
+        objImage = PictureBox1.Image
+        Dim objGuid As Guid = (objImage.FrameDimensionsList(0))
+        Dim objDimension As System.Drawing.Imaging.FrameDimension = New System.Drawing.Imaging.FrameDimension(objGuid)
+        'objImage.SelectActiveFrame(objDimension, curF)
+        'picImage.Image = objImage
+        'picImage.SizeMode = PictureBoxSizeMode.Zoom
+
+
+        '#REGION#
+        'Changed the cursor to waitCursor
+        Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
+        'Sets the tiff file as an image object.
+
+
+        'Gets the total number of frames in the .tiff file
+        totFrame = objImage.GetFrameCount(objDimension)
+        totalPages = CInt(objImage.GetFrameCount(FrameDimension.Page))
+        MsgBox(totalPages)
+        objImage.SelectActiveFrame(FrameDimension.Page, 1)
+
+        PictureBox1.Refresh()
+
+
+
+        'Adds number of frames to the combo box for displaying purposes.
+        'Dim i As Integer
+        'For i = 0 To totFrame - 1
+        'cboFrameNo.Items.Add(i)
+        'Next
+        'cboFrameNo.Items.IndexOf(1)
+
+        'Sets the temporary folder to "C:\temp\"
+        'strPath = "c:\temp\"
+
+        'Saves every frame as a seperate file.
+        'Dim z As Integer
+        'z = 0
+        'curF = 0
+        'For z = 0 To (totFrame - 1)
+        'objImage.SelectActiveFrame(objDimension, curF)
+        'objImage.Save(strPath & curF & ".tif", Imaging.ImageFormat.Tiff)
+        'curF = curF + 1
+        'Next
+
+        'curF = 0
+
+        'Displayes the frames
+        'DisplayFrame()
+        Me.Cursor = System.Windows.Forms.Cursors.Default
+
+    End Sub
 End Class
