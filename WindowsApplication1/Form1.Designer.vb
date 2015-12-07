@@ -30,10 +30,16 @@ Partial Class Form1
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.ListView1 = New System.Windows.Forms.ListView()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
+        Me.dirPath = New System.Windows.Forms.ToolStripStatusLabel()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Printview = New System.Windows.Forms.PrintPreviewDialog()
         Me.Button3 = New System.Windows.Forms.Button()
+        Me.ImportDirDialog = New System.Windows.Forms.FolderBrowserDialog()
+        Me.PdfOpen = New System.Windows.Forms.OpenFileDialog()
+        Me.btnPDFopen = New System.Windows.Forms.Button()
+        Me.Button4 = New System.Windows.Forms.Button()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'PictureBox1
@@ -50,9 +56,9 @@ Partial Class Form1
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(94, 12)
+        Me.Button1.Location = New System.Drawing.Point(64, 11)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 39)
+        Me.Button1.Size = New System.Drawing.Size(62, 39)
         Me.Button1.TabIndex = 1
         Me.Button1.Text = "Save Pic Image"
         Me.Button1.UseVisualStyleBackColor = True
@@ -65,25 +71,32 @@ Partial Class Form1
         '
         'ListView1
         '
-        Me.ListView1.Location = New System.Drawing.Point(12, 57)
+        Me.ListView1.Location = New System.Drawing.Point(12, 106)
         Me.ListView1.Name = "ListView1"
-        Me.ListView1.Size = New System.Drawing.Size(219, 744)
+        Me.ListView1.Size = New System.Drawing.Size(219, 695)
         Me.ListView1.TabIndex = 2
         Me.ListView1.UseCompatibleStateImageBehavior = False
         '
         'StatusStrip1
         '
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.dirPath})
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 808)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Size = New System.Drawing.Size(831, 22)
         Me.StatusStrip1.TabIndex = 3
         Me.StatusStrip1.Text = "StatusStrip1"
         '
+        'dirPath
+        '
+        Me.dirPath.Name = "dirPath"
+        Me.dirPath.Size = New System.Drawing.Size(82, 17)
+        Me.dirPath.Text = "Directory Path"
+        '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(12, 12)
+        Me.Button2.Location = New System.Drawing.Point(0, 11)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(76, 38)
+        Me.Button2.Size = New System.Drawing.Size(67, 38)
         Me.Button2.TabIndex = 4
         Me.Button2.Text = "Open File"
         Me.Button2.UseVisualStyleBackColor = True
@@ -100,12 +113,34 @@ Partial Class Form1
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(175, 12)
+        Me.Button3.Location = New System.Drawing.Point(123, 11)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(56, 38)
         Me.Button3.TabIndex = 5
         Me.Button3.Text = "Preview"
         Me.Button3.UseVisualStyleBackColor = True
+        '
+        'PdfOpen
+        '
+        Me.PdfOpen.FileName = "OpenFileDialog1"
+        '
+        'btnPDFopen
+        '
+        Me.btnPDFopen.Location = New System.Drawing.Point(175, 12)
+        Me.btnPDFopen.Name = "btnPDFopen"
+        Me.btnPDFopen.Size = New System.Drawing.Size(43, 36)
+        Me.btnPDFopen.TabIndex = 6
+        Me.btnPDFopen.Text = "PDF IMPORT"
+        Me.btnPDFopen.UseVisualStyleBackColor = True
+        '
+        'Button4
+        '
+        Me.Button4.Location = New System.Drawing.Point(3, 59)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(61, 36)
+        Me.Button4.TabIndex = 7
+        Me.Button4.Text = "Button4"
+        Me.Button4.UseVisualStyleBackColor = True
         '
         'Form1
         '
@@ -113,6 +148,8 @@ Partial Class Form1
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
         Me.ClientSize = New System.Drawing.Size(831, 830)
+        Me.Controls.Add(Me.Button4)
+        Me.Controls.Add(Me.btnPDFopen)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.StatusStrip1)
@@ -122,6 +159,8 @@ Partial Class Form1
         Me.Name = "Form1"
         Me.Text = "Form1"
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.StatusStrip1.ResumeLayout(False)
+        Me.StatusStrip1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -136,4 +175,9 @@ Partial Class Form1
     Friend WithEvents Button2 As Button
     Friend WithEvents Printview As PrintPreviewDialog
     Friend WithEvents Button3 As Button
+    Friend WithEvents ImportDirDialog As FolderBrowserDialog
+    Friend WithEvents dirPath As ToolStripStatusLabel
+    Friend WithEvents PdfOpen As OpenFileDialog
+    Friend WithEvents btnPDFopen As Button
+    Friend WithEvents Button4 As Button
 End Class

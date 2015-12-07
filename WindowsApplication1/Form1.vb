@@ -4,13 +4,15 @@ Imports System.Drawing.Imaging
 Imports System.IO
 Imports System.Drawing.Printing
 Imports Spire.Pdf
+Imports Spire.Pdf.Graphics
 
 Public Class Form1
     Private startCorner As Point
     Private rubberBand As Rectangle
     Private rubberBandColor As Color = Color.Red
     Private rubberBanding As Boolean = False
-
+    Public importeddir As Boolean = False
+    Public importedpdf As Boolean = False
     Dim finishX, finishY As Integer
     Dim startX, startY As Integer
     Dim up, down As Point
@@ -24,6 +26,8 @@ Public Class Form1
     Dim fs As FileStream
     Dim srcBmp As Bitmap
     Dim resized As Image
+    Dim img As Drawing.Image
+    Public filename As String
 
 
 
@@ -95,6 +99,62 @@ Public Class Form1
         objNewBmp.Save("c:\temp\s" & ".tif", Imaging.ImageFormat.Tiff)
     End Sub
 
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        OpenFile.ShowDialog()
+    End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+
+        If (ImportDirDialog.ShowDialog() = DialogResult.OK) Then
+
+            ImportDir()
+
+        End If
+
+    End Sub
+
+    Private Sub ListView1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListView1.SelectedIndexChanged
+        If importeddir = False And importedpdf = False Then
+            For Each item As ListViewItem In ListView1.SelectedItems()
+                srcBmp.SelectActiveFrame(FrameDimension.Page, item.ImageIndex)
+                'PictureBox1.Image = ResizeImage(srcBmp, New Size(PictureBox1.Width, PictureBox1.Height))
+                PictureBox1.Width = picsizew(srcBmp)
+                PictureBox1.Height = picsizeh(srcBmp)
+                PictureBox1.Image = srcBmp
+
+            Next
+
+        ElseIf importedpdf = True Then
+
+
+
+        Else
+
+
+
+
+            For Each item As ListViewItem In ListView1.SelectedItems()
+                Dim folder As String = dirPath.Text
+                filename = System.IO.Path.Combine(folder, item.Text)
+                fs = File.Open(filename, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite)
+                srcBmp = CType(Bitmap.FromStream(fs), Bitmap)
+                resized = New Bitmap(srcBmp, srcBmp.Width, srcBmp.Height)
+
+
+
+            Next
+
+            'PictureBox1.Image = ResizeImage(srcBmp, New Size(PictureBox1.Width, PictureBox1.Height))
+            PictureBox1.Width = picsizew(srcBmp)
+            PictureBox1.Height = picsizeh(srcBmp)
+            PictureBox1.Image = srcBmp
+
+        End If
+
+
+
+    End Sub
+
     Private Sub PictureBox1_MouseDown(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles PictureBox1.MouseDown
         If e.Button = MouseButtons.Left Then
             rubberBanding = True
@@ -113,26 +173,6 @@ Public Class Form1
             rubberBand.Y = Math.Min(e.Y, startCorner.Y)
             PictureBox1.Invalidate()
         End If
-    End Sub
-
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        OpenFile.ShowDialog()
-    End Sub
-
-    Private WithEvents doc As New PrintDocument()
-
-
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-        doc.DocumentName = OpenFile.FileName
-        Printview.Document = doc
-        Printview.ShowDialog()
-    End Sub
-
-    Private Sub ListView1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListView1.SelectedIndexChanged
-        For Each item As ListViewItem In ListView1.SelectedItems()
-            srcBmp.SelectActiveFrame(FrameDimension.Page, item.ImageIndex)
-            PictureBox1.Image = ResizeImage(srcBmp, New Size(PictureBox1.Width, PictureBox1.Height))
-        Next
     End Sub
 
     Private Sub PictureBox1_MouseUp(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles PictureBox1.MouseUp
@@ -189,5 +229,118 @@ Public Class Form1
             e.Graphics.DrawRectangle(pn, rubberBand)
         End Using
     End Sub
+
+    Private Sub btnPDFopen_Click(sender As Object, e As EventArgs) Handles btnPDFopen.Click
+
+        If (PdfOpen.ShowDialog() = DialogResult.OK) Then
+            Dim doc As New PdfDocument()
+            doc.LoadFromFile(PdfOpen.FileName)
+            For i = 0 To doc.Pages.Count - 1
+                'dirPath.Text = doc.Pages.Count
+                Dim bmp As Image = doc.SaveAsImage(i)
+                Dim emf As Image = doc.SaveAsImage(i, Spire.Pdf.Graphics.PdfImageType.Metafile)
+                Dim zoomImg As Image = New Bitmap(CInt(emf.Size.Width * 2), CInt(emf.Size.Height * 2))
+                Using g As Graphics = Graphics.FromImage(zoomImg)
+                    g.ScaleTransform(2.0F, 2.0F)
+                    g.DrawImage(emf, New Rectangle(New Point(0, 0), emf.Size), New Rectangle(New Point(0, 0), emf.Size), GraphicsUnit.Pixel)
+                End Using
+                'bmp.Save(i & "convertToBmp.bmp", ImageFormat.Bmp)
+                'System.Diagnostics.Process.Start(i & "convertToBmp.bmp")
+                'emf.Save(i & "convertToEmf.png", ImageFormat.Png)
+                'System.Diagnostics.Process.Start("convertToEmf.png")
+                zoomImg.Save(i & "convertToZoom.png", ImageFormat.Png)
+                'System.Diagnostics.Process.Start(i & "convertToZoom.png")
+                ListView1.Items.Add(Str(i), "Page " & i + 1, i)
+                resized = New Bitmap(zoomImg, zoomImg.Width, zoomImg.Height)
+                ImageList1.Images.Add(i, bmp)
+                'PictureBox1.Image = ResizeImage(zoomImg, New Size(PictureBox1.Width, PictureBox1.Height))
+                PictureBox1.Width = picsizew(zoomImg)
+                PictureBox1.Height = picsizeh(zoomImg)
+
+                PictureBox1.Image = resized
+            Next
+        End If
+        importedpdf = True
+        ListView1.LargeImageList = ImageList1
+    End Sub
+
+    Sub saveimagetopdf()
+        ' Create a pdf document with a section and page added.
+        Dim doc As New PdfDocument()
+        Dim section As PdfSection = doc.Sections.Add()
+        Dim page As PdfPageBase = doc.Pages.Add()
+
+        'Load a tif image from system
+        Dim image As PdfImage = PdfImage.FromFile("D:\images\bear.tif")
+        'Set image display location and size in PDF
+        Dim widthFitRate As Single = image.PhysicalDimension.Width / page.Canvas.ClientSize.Width
+        Dim heightFitRate As Single = image.PhysicalDimension.Height / page.Canvas.ClientSize.Height
+        Dim fitRate As Single = Math.Max(widthFitRate, heightFitRate)
+        Dim fitWidth As Single = image.PhysicalDimension.Width / fitRate
+        Dim fitHeight As Single = image.PhysicalDimension.Height / fitRate
+        page.Canvas.DrawImage(image, 30, 30, fitWidth, fitHeight)
+        'save and launch the file
+        doc.SaveToFile("image to pdf.pdf")
+        doc.Close()
+        System.Diagnostics.Process.Start("image to pdf.pdf")
+
+    End Sub
+
+    Sub ImportDir()
+        Dim di As DirectoryInfo = New DirectoryInfo(ImportDirDialog.SelectedPath)
+        Dim i As Integer = 0
+        ListView1.LargeImageList = ImageList1
+        For Each fi In di.EnumerateFiles("*.jpg")
+
+            fs = File.Open(fi.FullName, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite)
+            srcBmp = CType(Bitmap.FromStream(fs), Bitmap)
+            resized = New Bitmap(srcBmp, srcBmp.Width, srcBmp.Height)
+            ListView1.Items.Add(Str(i), fi.Name, i)
+            ImageList1.Images.Add(i, resized)
+            i += 1
+        Next
+        dirPath.Text = ImportDirDialog.SelectedPath
+        importeddir = True
+    End Sub
+
+
+    Function picsizew(pic As Image)
+        Dim picw As String
+        picw = pic.Width
+        Return picw
+    End Function
+
+    Function picsizeh(pic As Image)
+        Dim pich As String
+        pich = pic.Height
+        Return pich
+    End Function
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        'Dim prnDialog As New PrintDialog()
+        Printview.Document = prntDoc
+        Printview.ShowDialog()
+        ' Optional Dialog:    
+        'Dim r As DialogResult = prnDialog.ShowDialog
+        'If r = DialogResult.OK Then    
+        ' prntDoc.Print()
+        'End If    
+    End Sub
+
+    Friend WithEvents prntDoc As New PrintDocument()
+
+    Private Sub prntDoc_PrintPage(ByVal sender As Object, ByVal e As System.Drawing.Printing.PrintPageEventArgs) Handles prntDoc.PrintPage
+        Dim emf As Image = Me.PictureBox1.Image
+        Dim zoomImg As Image = New Bitmap(CInt(emf.Size.Width * 2), CInt(emf.Size.Height * 2))
+        Using g As Graphics = Graphics.FromImage(zoomImg)
+            g.ScaleTransform(2.0F, 2.0F)
+            g.DrawImage(emf, New Rectangle(New Point(0, 0), emf.Size), New Rectangle(New Point(0, 0), emf.Size), GraphicsUnit.Pixel)
+        End Using
+        e.Graphics.DrawImage(zoomImg, 0, 0)
+    End Sub
+
+
+
+
 
 End Class
