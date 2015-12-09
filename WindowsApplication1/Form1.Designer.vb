@@ -38,8 +38,15 @@ Partial Class Form1
         Me.PdfOpen = New System.Windows.Forms.OpenFileDialog()
         Me.btnPDFopen = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
+        Me.NaviBar1 = New Guifreaks.Navisuite.NaviBar(Me.components)
+        Me.NaviBand1 = New Guifreaks.Navisuite.NaviBand(Me.components)
+        Me.NaviBand2 = New Guifreaks.Navisuite.NaviBand(Me.components)
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.StatusStrip1.SuspendLayout()
+        Me.NaviBar1.SuspendLayout()
+        Me.NaviBand1.ClientArea.SuspendLayout()
+        Me.NaviBand1.SuspendLayout()
+        Me.NaviBand2.SuspendLayout()
         Me.SuspendLayout()
         '
         'PictureBox1
@@ -71,9 +78,9 @@ Partial Class Form1
         '
         'ListView1
         '
-        Me.ListView1.Location = New System.Drawing.Point(12, 106)
+        Me.ListView1.Location = New System.Drawing.Point(8, 3)
         Me.ListView1.Name = "ListView1"
-        Me.ListView1.Size = New System.Drawing.Size(219, 695)
+        Me.ListView1.Size = New System.Drawing.Size(219, 672)
         Me.ListView1.TabIndex = 2
         Me.ListView1.UseCompatibleStateImageBehavior = False
         '
@@ -135,12 +142,60 @@ Partial Class Form1
         '
         'Button4
         '
-        Me.Button4.Location = New System.Drawing.Point(3, 59)
+        Me.Button4.Location = New System.Drawing.Point(224, 14)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(61, 36)
         Me.Button4.TabIndex = 7
         Me.Button4.Text = "Button4"
         Me.Button4.UseVisualStyleBackColor = True
+        '
+        'NaviBar1
+        '
+        Me.NaviBar1.ActiveBand = Me.NaviBand2
+        Me.NaviBar1.Controls.Add(Me.NaviBand1)
+        Me.NaviBar1.Controls.Add(Me.NaviBand2)
+        Me.NaviBar1.Location = New System.Drawing.Point(3, 56)
+        Me.NaviBar1.Name = "NaviBar1"
+        Me.NaviBar1.Size = New System.Drawing.Size(241, 745)
+        Me.NaviBar1.TabIndex = 8
+        Me.NaviBar1.Text = "NaviBar1"
+        '
+        'NaviBand1
+        '
+        '
+        'NaviBand1.ClientArea
+        '
+        Me.NaviBand1.ClientArea.Controls.Add(Me.ListView1)
+        Me.NaviBand1.ClientArea.LayoutStyle = Guifreaks.Navisuite.NaviLayoutStyle.StyleFromOwner
+        Me.NaviBand1.ClientArea.Location = New System.Drawing.Point(0, 0)
+        Me.NaviBand1.ClientArea.Name = "ClientArea"
+        Me.NaviBand1.ClientArea.Size = New System.Drawing.Size(1, 1)
+        Me.NaviBand1.ClientArea.TabIndex = 0
+        Me.NaviBand1.LargeImageIndex = 0
+        Me.NaviBand1.LayoutStyle = Guifreaks.Navisuite.NaviLayoutStyle.StyleFromOwner
+        Me.NaviBand1.Location = New System.Drawing.Point(1, 27)
+        Me.NaviBand1.Name = "NaviBand1"
+        Me.NaviBand1.Size = New System.Drawing.Size(0, 0)
+        Me.NaviBand1.SmallImageIndex = 0
+        Me.NaviBand1.TabIndex = 3
+        '
+        'NaviBand2
+        '
+        '
+        'NaviBand2.ClientArea
+        '
+        Me.NaviBand2.ClientArea.LayoutStyle = Guifreaks.Navisuite.NaviLayoutStyle.StyleFromOwner
+        Me.NaviBand2.ClientArea.Location = New System.Drawing.Point(0, 0)
+        Me.NaviBand2.ClientArea.Name = "ClientArea"
+        Me.NaviBand2.ClientArea.Size = New System.Drawing.Size(239, 678)
+        Me.NaviBand2.ClientArea.TabIndex = 0
+        Me.NaviBand2.LargeImageIndex = 0
+        Me.NaviBand2.LayoutStyle = Guifreaks.Navisuite.NaviLayoutStyle.StyleFromOwner
+        Me.NaviBand2.Location = New System.Drawing.Point(1, 27)
+        Me.NaviBand2.Name = "NaviBand2"
+        Me.NaviBand2.Size = New System.Drawing.Size(239, 678)
+        Me.NaviBand2.SmallImageIndex = 0
+        Me.NaviBand2.TabIndex = 5
         '
         'Form1
         '
@@ -148,12 +203,12 @@ Partial Class Form1
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
         Me.ClientSize = New System.Drawing.Size(831, 830)
+        Me.Controls.Add(Me.NaviBar1)
         Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.btnPDFopen)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.StatusStrip1)
-        Me.Controls.Add(Me.ListView1)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.PictureBox1)
         Me.Name = "Form1"
@@ -161,6 +216,10 @@ Partial Class Form1
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
+        Me.NaviBar1.ResumeLayout(False)
+        Me.NaviBand1.ClientArea.ResumeLayout(False)
+        Me.NaviBand1.ResumeLayout(False)
+        Me.NaviBand2.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -180,4 +239,7 @@ Partial Class Form1
     Friend WithEvents PdfOpen As OpenFileDialog
     Friend WithEvents btnPDFopen As Button
     Friend WithEvents Button4 As Button
+    Friend WithEvents NaviBar1 As Guifreaks.Navisuite.NaviBar
+    Friend WithEvents NaviBand2 As Guifreaks.Navisuite.NaviBand
+    Friend WithEvents NaviBand1 As Guifreaks.Navisuite.NaviBand
 End Class
