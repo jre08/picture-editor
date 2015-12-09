@@ -84,7 +84,7 @@ Public Class Form1
         Return newImage
     End Function
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub Save_Click(sender As Object, e As EventArgs) Handles RibbonButton5.Click
         'Saves the picturebox image in a temp folder
 
         Dim objNewBmp As New Bitmap(PictureBox1.Image)
@@ -99,11 +99,11 @@ Public Class Form1
         objNewBmp.Save("c:\temp\s" & ".tif", Imaging.ImageFormat.Tiff)
     End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+    Private Sub Openfile_click(sender As Object, e As EventArgs) Handles RibbonButton1.Click
         OpenFile.ShowDialog()
     End Sub
 
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+    Private Sub importDIR_Click(sender As Object, e As EventArgs) Handles RibbonButton2.Click
 
         If (ImportDirDialog.ShowDialog() = DialogResult.OK) Then
 
@@ -230,7 +230,7 @@ Public Class Form1
         End Using
     End Sub
 
-    Private Sub btnPDFopen_Click(sender As Object, e As EventArgs) Handles btnPDFopen.Click
+    Private Sub btnPDFopen_Click(sender As Object, e As EventArgs) Handles RibbonButton4.Click
 
         If (PdfOpen.ShowDialog() = DialogResult.OK) Then
             Dim doc As New PdfDocument()
@@ -316,7 +316,11 @@ Public Class Form1
         Return pich
     End Function
 
-    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+    Private Sub RibbonOrbOptionButton2_Click(sender As Object, e As EventArgs) Handles RibbonOrbOptionButton2.Click
+        Me.Close()
+    End Sub
+
+    Private Sub PrintPreview_Click(sender As Object, e As EventArgs) Handles RibbonButton3.Click
         'Dim prnDialog As New PrintDialog()
         Printview.Document = prntDoc
         Printview.ShowDialog()

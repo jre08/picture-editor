@@ -24,51 +24,47 @@ Partial Class Form1
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.OpenFile = New System.Windows.Forms.OpenFileDialog()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.ListView1 = New System.Windows.Forms.ListView()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.dirPath = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.Button2 = New System.Windows.Forms.Button()
         Me.Printview = New System.Windows.Forms.PrintPreviewDialog()
-        Me.Button3 = New System.Windows.Forms.Button()
         Me.ImportDirDialog = New System.Windows.Forms.FolderBrowserDialog()
         Me.PdfOpen = New System.Windows.Forms.OpenFileDialog()
-        Me.btnPDFopen = New System.Windows.Forms.Button()
-        Me.Button4 = New System.Windows.Forms.Button()
         Me.NaviBar1 = New Guifreaks.Navisuite.NaviBar(Me.components)
         Me.NaviBand1 = New Guifreaks.Navisuite.NaviBand(Me.components)
+        Me.NaviGroup1 = New Guifreaks.Navisuite.NaviGroup(Me.components)
         Me.NaviBand2 = New Guifreaks.Navisuite.NaviBand(Me.components)
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.Ribbon1 = New System.Windows.Forms.Ribbon()
+        Me.RibbonOrbOptionButton2 = New System.Windows.Forms.RibbonOrbOptionButton()
+        Me.RibbonTab1 = New System.Windows.Forms.RibbonTab()
+        Me.RibbonPanel1 = New System.Windows.Forms.RibbonPanel()
+        Me.RibbonButton1 = New System.Windows.Forms.RibbonButton()
+        Me.RibbonButton2 = New System.Windows.Forms.RibbonButton()
+        Me.RibbonButton3 = New System.Windows.Forms.RibbonButton()
+        Me.RibbonButton5 = New System.Windows.Forms.RibbonButton()
+        Me.RibbonPanel2 = New System.Windows.Forms.RibbonPanel()
+        Me.RibbonButton4 = New System.Windows.Forms.RibbonButton()
+        Me.RibbonOrbOptionButton1 = New System.Windows.Forms.RibbonOrbOptionButton()
+        Me.RibbonOrbRecentItem1 = New System.Windows.Forms.RibbonOrbRecentItem()
+        Me.RibbonOrbRecentItem2 = New System.Windows.Forms.RibbonOrbRecentItem()
+        Me.RibbonOrbMenuItem1 = New System.Windows.Forms.RibbonOrbMenuItem()
+        Me.RibbonOrbMenuItem2 = New System.Windows.Forms.RibbonOrbMenuItem()
+        Me.RibbonOrbMenuItem3 = New System.Windows.Forms.RibbonOrbMenuItem()
         Me.StatusStrip1.SuspendLayout()
         Me.NaviBar1.SuspendLayout()
         Me.NaviBand1.ClientArea.SuspendLayout()
         Me.NaviBand1.SuspendLayout()
+        CType(Me.NaviGroup1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.NaviGroup1.SuspendLayout()
         Me.NaviBand2.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.PictureBox1.Location = New System.Drawing.Point(250, 12)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(569, 789)
-        Me.PictureBox1.TabIndex = 0
-        Me.PictureBox1.TabStop = False
         '
         'OpenFile
         '
-        '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(64, 11)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(62, 39)
-        Me.Button1.TabIndex = 1
-        Me.Button1.Text = "Save Pic Image"
-        Me.Button1.UseVisualStyleBackColor = True
         '
         'ImageList1
         '
@@ -78,9 +74,9 @@ Partial Class Form1
         '
         'ListView1
         '
-        Me.ListView1.Location = New System.Drawing.Point(8, 3)
+        Me.ListView1.Location = New System.Drawing.Point(6, 25)
         Me.ListView1.Name = "ListView1"
-        Me.ListView1.Size = New System.Drawing.Size(219, 672)
+        Me.ListView1.Size = New System.Drawing.Size(219, 391)
         Me.ListView1.TabIndex = 2
         Me.ListView1.UseCompatibleStateImageBehavior = False
         '
@@ -89,7 +85,7 @@ Partial Class Form1
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.dirPath})
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 808)
         Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(831, 22)
+        Me.StatusStrip1.Size = New System.Drawing.Size(848, 22)
         Me.StatusStrip1.TabIndex = 3
         Me.StatusStrip1.Text = "StatusStrip1"
         '
@@ -98,15 +94,6 @@ Partial Class Form1
         Me.dirPath.Name = "dirPath"
         Me.dirPath.Size = New System.Drawing.Size(82, 17)
         Me.dirPath.Text = "Directory Path"
-        '
-        'Button2
-        '
-        Me.Button2.Location = New System.Drawing.Point(0, 11)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(67, 38)
-        Me.Button2.TabIndex = 4
-        Me.Button2.Text = "Open File"
-        Me.Button2.UseVisualStyleBackColor = True
         '
         'Printview
         '
@@ -118,66 +105,57 @@ Partial Class Form1
         Me.Printview.Name = "Printview"
         Me.Printview.Visible = False
         '
-        'Button3
-        '
-        Me.Button3.Location = New System.Drawing.Point(123, 11)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(56, 38)
-        Me.Button3.TabIndex = 5
-        Me.Button3.Text = "Preview"
-        Me.Button3.UseVisualStyleBackColor = True
-        '
         'PdfOpen
         '
         Me.PdfOpen.FileName = "OpenFileDialog1"
         '
-        'btnPDFopen
-        '
-        Me.btnPDFopen.Location = New System.Drawing.Point(175, 12)
-        Me.btnPDFopen.Name = "btnPDFopen"
-        Me.btnPDFopen.Size = New System.Drawing.Size(43, 36)
-        Me.btnPDFopen.TabIndex = 6
-        Me.btnPDFopen.Text = "PDF IMPORT"
-        Me.btnPDFopen.UseVisualStyleBackColor = True
-        '
-        'Button4
-        '
-        Me.Button4.Location = New System.Drawing.Point(224, 14)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(61, 36)
-        Me.Button4.TabIndex = 7
-        Me.Button4.Text = "Button4"
-        Me.Button4.UseVisualStyleBackColor = True
-        '
         'NaviBar1
         '
-        Me.NaviBar1.ActiveBand = Me.NaviBand2
+        Me.NaviBar1.ActiveBand = Me.NaviBand1
+        Me.NaviBar1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.NaviBar1.Controls.Add(Me.NaviBand1)
         Me.NaviBar1.Controls.Add(Me.NaviBand2)
-        Me.NaviBar1.Location = New System.Drawing.Point(3, 56)
+        Me.NaviBar1.LayoutStyle = Guifreaks.Navisuite.NaviLayoutStyle.Office2007Silver
+        Me.NaviBar1.Location = New System.Drawing.Point(3, 139)
         Me.NaviBar1.Name = "NaviBar1"
-        Me.NaviBar1.Size = New System.Drawing.Size(241, 745)
+        Me.NaviBar1.Size = New System.Drawing.Size(241, 666)
         Me.NaviBar1.TabIndex = 8
-        Me.NaviBar1.Text = "NaviBar1"
+        Me.NaviBar1.Text = "Redact Editor"
         '
         'NaviBand1
         '
         '
         'NaviBand1.ClientArea
         '
-        Me.NaviBand1.ClientArea.Controls.Add(Me.ListView1)
+        Me.NaviBand1.ClientArea.Controls.Add(Me.NaviGroup1)
         Me.NaviBand1.ClientArea.LayoutStyle = Guifreaks.Navisuite.NaviLayoutStyle.StyleFromOwner
-        Me.NaviBand1.ClientArea.Location = New System.Drawing.Point(0, 0)
+        Me.NaviBand1.ClientArea.Location = New System.Drawing.Point(0, 3)
         Me.NaviBand1.ClientArea.Name = "ClientArea"
-        Me.NaviBand1.ClientArea.Size = New System.Drawing.Size(1, 1)
+        Me.NaviBand1.ClientArea.Size = New System.Drawing.Size(239, 599)
         Me.NaviBand1.ClientArea.TabIndex = 0
         Me.NaviBand1.LargeImageIndex = 0
         Me.NaviBand1.LayoutStyle = Guifreaks.Navisuite.NaviLayoutStyle.StyleFromOwner
         Me.NaviBand1.Location = New System.Drawing.Point(1, 27)
         Me.NaviBand1.Name = "NaviBand1"
-        Me.NaviBand1.Size = New System.Drawing.Size(0, 0)
+        Me.NaviBand1.Size = New System.Drawing.Size(239, 599)
         Me.NaviBand1.SmallImageIndex = 0
         Me.NaviBand1.TabIndex = 3
+        '
+        'NaviGroup1
+        '
+        Me.NaviGroup1.Caption = "Thumbnail Images"
+        Me.NaviGroup1.Controls.Add(Me.ListView1)
+        Me.NaviGroup1.Expanded = False
+        Me.NaviGroup1.ExpandedHeight = 429
+        Me.NaviGroup1.HeaderContextMenuStrip = Nothing
+        Me.NaviGroup1.LayoutStyle = Guifreaks.Navisuite.NaviLayoutStyle.Office2007Silver
+        Me.NaviGroup1.Location = New System.Drawing.Point(2, 0)
+        Me.NaviGroup1.Name = "NaviGroup1"
+        Me.NaviGroup1.Padding = New System.Windows.Forms.Padding(1, 22, 1, 1)
+        Me.NaviGroup1.Size = New System.Drawing.Size(234, 20)
+        Me.NaviGroup1.TabIndex = 0
+        Me.NaviGroup1.Text = "Thumbnails"
         '
         'NaviBand2
         '
@@ -185,61 +163,203 @@ Partial Class Form1
         'NaviBand2.ClientArea
         '
         Me.NaviBand2.ClientArea.LayoutStyle = Guifreaks.Navisuite.NaviLayoutStyle.StyleFromOwner
-        Me.NaviBand2.ClientArea.Location = New System.Drawing.Point(0, 0)
+        Me.NaviBand2.ClientArea.Location = New System.Drawing.Point(2, 3)
         Me.NaviBand2.ClientArea.Name = "ClientArea"
-        Me.NaviBand2.ClientArea.Size = New System.Drawing.Size(239, 678)
+        Me.NaviBand2.ClientArea.Size = New System.Drawing.Size(1, 1)
         Me.NaviBand2.ClientArea.TabIndex = 0
         Me.NaviBand2.LargeImageIndex = 0
         Me.NaviBand2.LayoutStyle = Guifreaks.Navisuite.NaviLayoutStyle.StyleFromOwner
         Me.NaviBand2.Location = New System.Drawing.Point(1, 27)
         Me.NaviBand2.Name = "NaviBand2"
-        Me.NaviBand2.Size = New System.Drawing.Size(239, 678)
+        Me.NaviBand2.Size = New System.Drawing.Size(0, 0)
         Me.NaviBand2.SmallImageIndex = 0
         Me.NaviBand2.TabIndex = 5
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.PictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PictureBox1.Location = New System.Drawing.Point(250, 139)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(586, 666)
+        Me.PictureBox1.TabIndex = 0
+        Me.PictureBox1.TabStop = False
+        '
+        'Ribbon1
+        '
+        Me.Ribbon1.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.Ribbon1.Location = New System.Drawing.Point(0, 0)
+        Me.Ribbon1.Minimized = False
+        Me.Ribbon1.Name = "Ribbon1"
+        '
+        '
+        '
+        Me.Ribbon1.OrbDropDown.BorderRoundness = 8
+        Me.Ribbon1.OrbDropDown.Location = New System.Drawing.Point(0, 0)
+        Me.Ribbon1.OrbDropDown.MenuItems.Add(Me.RibbonOrbMenuItem3)
+        Me.Ribbon1.OrbDropDown.Name = ""
+        Me.Ribbon1.OrbDropDown.OptionItems.Add(Me.RibbonOrbOptionButton2)
+        Me.Ribbon1.OrbDropDown.Size = New System.Drawing.Size(527, 116)
+        Me.Ribbon1.OrbDropDown.TabIndex = 0
+        Me.Ribbon1.OrbImage = Global.PictureBoxPractice.My.Resources.Resources.icon_home
+        Me.Ribbon1.RibbonTabFont = New System.Drawing.Font("Trebuchet MS", 9.0!)
+        Me.Ribbon1.Size = New System.Drawing.Size(848, 133)
+        Me.Ribbon1.TabIndex = 9
+        Me.Ribbon1.Tabs.Add(Me.RibbonTab1)
+        Me.Ribbon1.TabsMargin = New System.Windows.Forms.Padding(12, 26, 20, 0)
+        Me.Ribbon1.Text = "Ribbon1"
+        Me.Ribbon1.ThemeColor = System.Windows.Forms.RibbonTheme.Black
+        '
+        'RibbonOrbOptionButton2
+        '
+        Me.RibbonOrbOptionButton2.Image = CType(resources.GetObject("RibbonOrbOptionButton2.Image"), System.Drawing.Image)
+        Me.RibbonOrbOptionButton2.SmallImage = CType(resources.GetObject("RibbonOrbOptionButton2.SmallImage"), System.Drawing.Image)
+        Me.RibbonOrbOptionButton2.Text = "Close"
+        '
+        'RibbonTab1
+        '
+        Me.RibbonTab1.Panels.Add(Me.RibbonPanel1)
+        Me.RibbonTab1.Panels.Add(Me.RibbonPanel2)
+        Me.RibbonTab1.Text = "Home"
+        '
+        'RibbonPanel1
+        '
+        Me.RibbonPanel1.Items.Add(Me.RibbonButton1)
+        Me.RibbonPanel1.Items.Add(Me.RibbonButton2)
+        Me.RibbonPanel1.Items.Add(Me.RibbonButton3)
+        Me.RibbonPanel1.Items.Add(Me.RibbonButton5)
+        Me.RibbonPanel1.Text = "Open / Save File"
+        '
+        'RibbonButton1
+        '
+        Me.RibbonButton1.Image = Global.PictureBoxPractice.My.Resources.Resources.folder_images
+        Me.RibbonButton1.SmallImage = Global.PictureBoxPractice.My.Resources.Resources.folder_images
+        Me.RibbonButton1.Text = "Open Image"
+        Me.RibbonButton1.ToolTip = "Open a specific image"
+        '
+        'RibbonButton2
+        '
+        Me.RibbonButton2.Image = Global.PictureBoxPractice.My.Resources.Resources.folder
+        Me.RibbonButton2.SmallImage = CType(resources.GetObject("RibbonButton2.SmallImage"), System.Drawing.Image)
+        Me.RibbonButton2.Text = "Import Folder"
+        Me.RibbonButton2.ToolTip = "Import a folder of images"
+        '
+        'RibbonButton3
+        '
+        Me.RibbonButton3.Image = Global.PictureBoxPractice.My.Resources.Resources.action_print
+        Me.RibbonButton3.SmallImage = CType(resources.GetObject("RibbonButton3.SmallImage"), System.Drawing.Image)
+        Me.RibbonButton3.Text = "Print Preview"
+        '
+        'RibbonButton5
+        '
+        Me.RibbonButton5.Image = Global.PictureBoxPractice.My.Resources.Resources.action_save
+        Me.RibbonButton5.SmallImage = CType(resources.GetObject("RibbonButton5.SmallImage"), System.Drawing.Image)
+        Me.RibbonButton5.Text = "Save File"
+        '
+        'RibbonPanel2
+        '
+        Me.RibbonPanel2.Items.Add(Me.RibbonButton4)
+        Me.RibbonPanel2.Text = "PDF TOOLS"
+        '
+        'RibbonButton4
+        '
+        Me.RibbonButton4.Image = Global.PictureBoxPractice.My.Resources.Resources.icon_component
+        Me.RibbonButton4.SmallImage = CType(resources.GetObject("RibbonButton4.SmallImage"), System.Drawing.Image)
+        Me.RibbonButton4.Text = "Import PDF"
+        '
+        'RibbonOrbOptionButton1
+        '
+        Me.RibbonOrbOptionButton1.Image = Global.PictureBoxPractice.My.Resources.Resources.action_stop
+        Me.RibbonOrbOptionButton1.SmallImage = Global.PictureBoxPractice.My.Resources.Resources.action_stop
+        Me.RibbonOrbOptionButton1.Text = "CLOSE"
+        '
+        'RibbonOrbRecentItem1
+        '
+        Me.RibbonOrbRecentItem1.Image = CType(resources.GetObject("RibbonOrbRecentItem1.Image"), System.Drawing.Image)
+        Me.RibbonOrbRecentItem1.SmallImage = CType(resources.GetObject("RibbonOrbRecentItem1.SmallImage"), System.Drawing.Image)
+        Me.RibbonOrbRecentItem1.Text = "RibbonOrbRecentItem1"
+        '
+        'RibbonOrbRecentItem2
+        '
+        Me.RibbonOrbRecentItem2.Image = CType(resources.GetObject("RibbonOrbRecentItem2.Image"), System.Drawing.Image)
+        Me.RibbonOrbRecentItem2.SmallImage = CType(resources.GetObject("RibbonOrbRecentItem2.SmallImage"), System.Drawing.Image)
+        Me.RibbonOrbRecentItem2.Text = "RibbonOrbRecentItem2"
+        '
+        'RibbonOrbMenuItem1
+        '
+        Me.RibbonOrbMenuItem1.DropDownArrowDirection = System.Windows.Forms.RibbonArrowDirection.Left
+        Me.RibbonOrbMenuItem1.Image = CType(resources.GetObject("RibbonOrbMenuItem1.Image"), System.Drawing.Image)
+        Me.RibbonOrbMenuItem1.SmallImage = CType(resources.GetObject("RibbonOrbMenuItem1.SmallImage"), System.Drawing.Image)
+        Me.RibbonOrbMenuItem1.Text = "RibbonOrbMenuItem1"
+        '
+        'RibbonOrbMenuItem2
+        '
+        Me.RibbonOrbMenuItem2.DropDownArrowDirection = System.Windows.Forms.RibbonArrowDirection.Left
+        Me.RibbonOrbMenuItem2.Image = CType(resources.GetObject("RibbonOrbMenuItem2.Image"), System.Drawing.Image)
+        Me.RibbonOrbMenuItem2.SmallImage = CType(resources.GetObject("RibbonOrbMenuItem2.SmallImage"), System.Drawing.Image)
+        Me.RibbonOrbMenuItem2.Text = "RibbonOrbMenuItem2"
+        '
+        'RibbonOrbMenuItem3
+        '
+        Me.RibbonOrbMenuItem3.DropDownArrowDirection = System.Windows.Forms.RibbonArrowDirection.Left
+        Me.RibbonOrbMenuItem3.Image = CType(resources.GetObject("RibbonOrbMenuItem3.Image"), System.Drawing.Image)
+        Me.RibbonOrbMenuItem3.SmallImage = CType(resources.GetObject("RibbonOrbMenuItem3.SmallImage"), System.Drawing.Image)
+        Me.RibbonOrbMenuItem3.Text = "RibbonOrbMenuItem3"
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
-        Me.ClientSize = New System.Drawing.Size(831, 830)
-        Me.Controls.Add(Me.NaviBar1)
-        Me.Controls.Add(Me.Button4)
-        Me.Controls.Add(Me.btnPDFopen)
-        Me.Controls.Add(Me.Button3)
-        Me.Controls.Add(Me.Button2)
-        Me.Controls.Add(Me.StatusStrip1)
-        Me.Controls.Add(Me.Button1)
+        Me.ClientSize = New System.Drawing.Size(848, 830)
+        Me.Controls.Add(Me.Ribbon1)
         Me.Controls.Add(Me.PictureBox1)
+        Me.Controls.Add(Me.NaviBar1)
+        Me.Controls.Add(Me.StatusStrip1)
         Me.Name = "Form1"
         Me.Text = "Form1"
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
         Me.NaviBar1.ResumeLayout(False)
         Me.NaviBand1.ClientArea.ResumeLayout(False)
         Me.NaviBand1.ResumeLayout(False)
+        CType(Me.NaviGroup1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.NaviGroup1.ResumeLayout(False)
         Me.NaviBand2.ResumeLayout(False)
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents OpenFile As OpenFileDialog
-    Friend WithEvents Button1 As Button
     Friend WithEvents ImageList1 As ImageList
     Friend WithEvents ListView1 As ListView
     Friend WithEvents StatusStrip1 As StatusStrip
-    Friend WithEvents Button2 As Button
     Friend WithEvents Printview As PrintPreviewDialog
-    Friend WithEvents Button3 As Button
     Friend WithEvents ImportDirDialog As FolderBrowserDialog
     Friend WithEvents dirPath As ToolStripStatusLabel
     Friend WithEvents PdfOpen As OpenFileDialog
-    Friend WithEvents btnPDFopen As Button
-    Friend WithEvents Button4 As Button
     Friend WithEvents NaviBar1 As Guifreaks.Navisuite.NaviBar
     Friend WithEvents NaviBand2 As Guifreaks.Navisuite.NaviBand
     Friend WithEvents NaviBand1 As Guifreaks.Navisuite.NaviBand
+    Friend WithEvents NaviGroup1 As Guifreaks.Navisuite.NaviGroup
+    Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents Ribbon1 As Ribbon
+    Friend WithEvents RibbonTab1 As RibbonTab
+    Friend WithEvents RibbonPanel1 As RibbonPanel
+    Friend WithEvents RibbonButton1 As RibbonButton
+    Friend WithEvents RibbonButton2 As RibbonButton
+    Friend WithEvents RibbonButton3 As RibbonButton
+    Friend WithEvents RibbonPanel2 As RibbonPanel
+    Friend WithEvents RibbonButton4 As RibbonButton
+    Friend WithEvents RibbonButton5 As RibbonButton
+    Friend WithEvents RibbonOrbOptionButton1 As RibbonOrbOptionButton
+    Friend WithEvents RibbonOrbRecentItem1 As RibbonOrbRecentItem
+    Friend WithEvents RibbonOrbRecentItem2 As RibbonOrbRecentItem
+    Friend WithEvents RibbonOrbMenuItem1 As RibbonOrbMenuItem
+    Friend WithEvents RibbonOrbMenuItem2 As RibbonOrbMenuItem
+    Friend WithEvents RibbonOrbOptionButton2 As RibbonOrbOptionButton
+    Friend WithEvents RibbonOrbMenuItem3 As RibbonOrbMenuItem
 End Class

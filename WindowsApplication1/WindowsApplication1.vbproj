@@ -47,8 +47,12 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Guifreaks.Common, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b9e40ae01dee0076" />
-    <Reference Include="Guifreaks.Navisuite, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7f6dc13cbca790ea, processorArchitecture=MSIL" />
+    <Reference Include="Guifreaks.Common, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b9e40ae01dee0076">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\NaviSuite2.0\Guifreaks.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Guifreaks.Navisuite, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7f6dc13cbca790ea, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\NaviSuite2.0\Guifreaks.Navisuite.dll</HintPath>
+    </Reference>
     <Reference Include="Spire.License, Version=1.3.2.40, Culture=neutral, PublicKeyToken=b1144360237c8b3f, processorArchitecture=MSIL">
       <HintPath>..\packages\FreeSpire.PDF.3.2\lib\net40\Spire.License.dll</HintPath>
       <Private>True</Private>
@@ -63,6 +67,7 @@
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.Ribbon35, Version=3.5.8.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -131,8 +136,22 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Assembly\" />
+    <Content Include="Assembly\System.Windows.Forms.Ribbon35.dll" />
+    <None Include="Resources\icon_home.gif" />
+    <None Include="Resources\icon_component.gif" />
+    <None Include="Resources\icon_attachment.gif" />
+    <None Include="Resources\folder_images.gif" />
+    <None Include="Resources\folder.gif" />
+    <None Include="Resources\cut.gif" />
+    <None Include="Resources\comment.gif" />
+    <None Include="Resources\action_stop.gif" />
+    <None Include="Resources\action_save.gif" />
+    <None Include="Resources\action_print.gif" />
+    <None Include="Resources\action_paste.gif" />
+    <None Include="Resources\action_forward.gif" />
+    <None Include="Resources\action_back.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
