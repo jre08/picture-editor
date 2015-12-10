@@ -38,6 +38,7 @@ Partial Class Form1
         Me.NaviBand2 = New Guifreaks.Navisuite.NaviBand(Me.components)
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Ribbon1 = New System.Windows.Forms.Ribbon()
+        Me.RibbonOrbMenuItem3 = New System.Windows.Forms.RibbonOrbMenuItem()
         Me.RibbonOrbOptionButton2 = New System.Windows.Forms.RibbonOrbOptionButton()
         Me.RibbonTab1 = New System.Windows.Forms.RibbonTab()
         Me.RibbonPanel1 = New System.Windows.Forms.RibbonPanel()
@@ -52,7 +53,8 @@ Partial Class Form1
         Me.RibbonOrbRecentItem2 = New System.Windows.Forms.RibbonOrbRecentItem()
         Me.RibbonOrbMenuItem1 = New System.Windows.Forms.RibbonOrbMenuItem()
         Me.RibbonOrbMenuItem2 = New System.Windows.Forms.RibbonOrbMenuItem()
-        Me.RibbonOrbMenuItem3 = New System.Windows.Forms.RibbonOrbMenuItem()
+        Me.RibbonPanel3 = New System.Windows.Forms.RibbonPanel()
+        Me.Rbn_ck_Editmode = New System.Windows.Forms.RibbonCheckBox()
         Me.StatusStrip1.SuspendLayout()
         Me.NaviBar1.SuspendLayout()
         Me.NaviBand1.ClientArea.SuspendLayout()
@@ -83,9 +85,9 @@ Partial Class Form1
         'StatusStrip1
         '
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.dirPath})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 808)
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 843)
         Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(848, 22)
+        Me.StatusStrip1.Size = New System.Drawing.Size(928, 22)
         Me.StatusStrip1.TabIndex = 3
         Me.StatusStrip1.Text = "StatusStrip1"
         '
@@ -119,7 +121,7 @@ Partial Class Form1
         Me.NaviBar1.LayoutStyle = Guifreaks.Navisuite.NaviLayoutStyle.Office2007Silver
         Me.NaviBar1.Location = New System.Drawing.Point(3, 139)
         Me.NaviBar1.Name = "NaviBar1"
-        Me.NaviBar1.Size = New System.Drawing.Size(241, 666)
+        Me.NaviBar1.Size = New System.Drawing.Size(241, 701)
         Me.NaviBar1.TabIndex = 8
         Me.NaviBar1.Text = "Redact Editor"
         '
@@ -132,13 +134,13 @@ Partial Class Form1
         Me.NaviBand1.ClientArea.LayoutStyle = Guifreaks.Navisuite.NaviLayoutStyle.StyleFromOwner
         Me.NaviBand1.ClientArea.Location = New System.Drawing.Point(0, 3)
         Me.NaviBand1.ClientArea.Name = "ClientArea"
-        Me.NaviBand1.ClientArea.Size = New System.Drawing.Size(239, 599)
+        Me.NaviBand1.ClientArea.Size = New System.Drawing.Size(239, 634)
         Me.NaviBand1.ClientArea.TabIndex = 0
         Me.NaviBand1.LargeImageIndex = 0
         Me.NaviBand1.LayoutStyle = Guifreaks.Navisuite.NaviLayoutStyle.StyleFromOwner
         Me.NaviBand1.Location = New System.Drawing.Point(1, 27)
         Me.NaviBand1.Name = "NaviBand1"
-        Me.NaviBand1.Size = New System.Drawing.Size(239, 599)
+        Me.NaviBand1.Size = New System.Drawing.Size(239, 634)
         Me.NaviBand1.SmallImageIndex = 0
         Me.NaviBand1.TabIndex = 3
         '
@@ -146,14 +148,13 @@ Partial Class Form1
         '
         Me.NaviGroup1.Caption = "Thumbnail Images"
         Me.NaviGroup1.Controls.Add(Me.ListView1)
-        Me.NaviGroup1.Expanded = False
         Me.NaviGroup1.ExpandedHeight = 429
         Me.NaviGroup1.HeaderContextMenuStrip = Nothing
         Me.NaviGroup1.LayoutStyle = Guifreaks.Navisuite.NaviLayoutStyle.Office2007Silver
         Me.NaviGroup1.Location = New System.Drawing.Point(2, 0)
         Me.NaviGroup1.Name = "NaviGroup1"
         Me.NaviGroup1.Padding = New System.Windows.Forms.Padding(1, 22, 1, 1)
-        Me.NaviGroup1.Size = New System.Drawing.Size(234, 20)
+        Me.NaviGroup1.Size = New System.Drawing.Size(234, 429)
         Me.NaviGroup1.TabIndex = 0
         Me.NaviGroup1.Text = "Thumbnails"
         '
@@ -177,13 +178,10 @@ Partial Class Form1
         '
         'PictureBox1
         '
-        Me.PictureBox1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.PictureBox1.Location = New System.Drawing.Point(250, 139)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(586, 666)
+        Me.PictureBox1.Size = New System.Drawing.Size(666, 701)
         Me.PictureBox1.TabIndex = 0
         Me.PictureBox1.TabStop = False
         '
@@ -205,12 +203,19 @@ Partial Class Form1
         Me.Ribbon1.OrbDropDown.TabIndex = 0
         Me.Ribbon1.OrbImage = Global.PictureBoxPractice.My.Resources.Resources.icon_home
         Me.Ribbon1.RibbonTabFont = New System.Drawing.Font("Trebuchet MS", 9.0!)
-        Me.Ribbon1.Size = New System.Drawing.Size(848, 133)
+        Me.Ribbon1.Size = New System.Drawing.Size(928, 133)
         Me.Ribbon1.TabIndex = 9
         Me.Ribbon1.Tabs.Add(Me.RibbonTab1)
         Me.Ribbon1.TabsMargin = New System.Windows.Forms.Padding(12, 26, 20, 0)
         Me.Ribbon1.Text = "Ribbon1"
         Me.Ribbon1.ThemeColor = System.Windows.Forms.RibbonTheme.Black
+        '
+        'RibbonOrbMenuItem3
+        '
+        Me.RibbonOrbMenuItem3.DropDownArrowDirection = System.Windows.Forms.RibbonArrowDirection.Left
+        Me.RibbonOrbMenuItem3.Image = CType(resources.GetObject("RibbonOrbMenuItem3.Image"), System.Drawing.Image)
+        Me.RibbonOrbMenuItem3.SmallImage = CType(resources.GetObject("RibbonOrbMenuItem3.SmallImage"), System.Drawing.Image)
+        Me.RibbonOrbMenuItem3.Text = "RibbonOrbMenuItem3"
         '
         'RibbonOrbOptionButton2
         '
@@ -222,6 +227,7 @@ Partial Class Form1
         '
         Me.RibbonTab1.Panels.Add(Me.RibbonPanel1)
         Me.RibbonTab1.Panels.Add(Me.RibbonPanel2)
+        Me.RibbonTab1.Panels.Add(Me.RibbonPanel3)
         Me.RibbonTab1.Text = "Home"
         '
         'RibbonPanel1
@@ -301,19 +307,21 @@ Partial Class Form1
         Me.RibbonOrbMenuItem2.SmallImage = CType(resources.GetObject("RibbonOrbMenuItem2.SmallImage"), System.Drawing.Image)
         Me.RibbonOrbMenuItem2.Text = "RibbonOrbMenuItem2"
         '
-        'RibbonOrbMenuItem3
+        'RibbonPanel3
         '
-        Me.RibbonOrbMenuItem3.DropDownArrowDirection = System.Windows.Forms.RibbonArrowDirection.Left
-        Me.RibbonOrbMenuItem3.Image = CType(resources.GetObject("RibbonOrbMenuItem3.Image"), System.Drawing.Image)
-        Me.RibbonOrbMenuItem3.SmallImage = CType(resources.GetObject("RibbonOrbMenuItem3.SmallImage"), System.Drawing.Image)
-        Me.RibbonOrbMenuItem3.Text = "RibbonOrbMenuItem3"
+        Me.RibbonPanel3.Items.Add(Me.Rbn_ck_Editmode)
+        Me.RibbonPanel3.Text = "Edit Image"
+        '
+        'Rbn_ck_Editmode
+        '
+        Me.Rbn_ck_Editmode.Text = "Edit Mode Enabled"
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
-        Me.ClientSize = New System.Drawing.Size(848, 830)
+        Me.ClientSize = New System.Drawing.Size(928, 865)
         Me.Controls.Add(Me.Ribbon1)
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.NaviBar1)
@@ -362,4 +370,6 @@ Partial Class Form1
     Friend WithEvents RibbonOrbMenuItem2 As RibbonOrbMenuItem
     Friend WithEvents RibbonOrbOptionButton2 As RibbonOrbOptionButton
     Friend WithEvents RibbonOrbMenuItem3 As RibbonOrbMenuItem
+    Friend WithEvents RibbonPanel3 As RibbonPanel
+    Friend WithEvents Rbn_ck_Editmode As RibbonCheckBox
 End Class

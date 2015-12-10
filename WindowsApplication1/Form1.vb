@@ -54,9 +54,6 @@ Public Class Form1
         srcBmp.SelectActiveFrame(FrameDimension.Page, 0)
         PictureBox1.Image = ResizeImage(srcBmp, New Size(PictureBox1.Width, PictureBox1.Height))
 
-
-        '##Open pdf
-        'LOADPDF(OpenFile.FileName)
     End Sub
 
     Public Shared Function ResizeImage(ByVal image As Image,
@@ -145,18 +142,21 @@ Public Class Form1
             Next
 
             'PictureBox1.Image = ResizeImage(srcBmp, New Size(PictureBox1.Width, PictureBox1.Height))
-            PictureBox1.Width = picsizew(srcBmp)
-            PictureBox1.Height = picsizeh(srcBmp)
+            If Rbn_ck_Editmode.Checked = True Then
+                PictureBox1.Width = picsizew(srcBmp)
+                PictureBox1.Height = picsizeh(srcBmp)
+            End If
+
             PictureBox1.Image = srcBmp
 
         End If
-
+        Me.Refresh()
 
 
     End Sub
 
     Private Sub PictureBox1_MouseDown(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles PictureBox1.MouseDown
-        If e.Button = MouseButtons.Left Then
+        If e.Button = MouseButtons.Left And Rbn_ck_Editmode.Checked = True Then
             rubberBanding = True
             startCorner = e.Location
             rubberBand = Rectangle.Empty
@@ -176,7 +176,7 @@ Public Class Form1
     End Sub
 
     Private Sub PictureBox1_MouseUp(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles PictureBox1.MouseUp
-        If e.Button = MouseButtons.Left Then
+        If e.Button = MouseButtons.Left And Rbn_ck_Editmode.Checked = True Then
 
             Dim img As Drawing.Image
             'sets the current page as image.
@@ -229,13 +229,20 @@ Public Class Form1
             e.Graphics.DrawRectangle(pn, rubberBand)
         End Using
     End Sub
+    Dim pages As Integer
 
     Private Sub btnPDFopen_Click(sender As Object, e As EventArgs) Handles RibbonButton4.Click
 
         If (PdfOpen.ShowDialog() = DialogResult.OK) Then
             Dim doc As New PdfDocument()
             doc.LoadFromFile(PdfOpen.FileName)
-            For i = 0 To doc.Pages.Count - 1
+            If doc.Pages.Count > 3 Then
+                pages = 2
+            Else
+                pages = doc.Pages.Count - 1
+            End If
+            For i = 0 To pages
+
                 'dirPath.Text = doc.Pages.Count
                 Dim bmp As Image = doc.SaveAsImage(i)
                 Dim emf As Image = doc.SaveAsImage(i, Spire.Pdf.Graphics.PdfImageType.Metafile)
@@ -321,14 +328,10 @@ Public Class Form1
     End Sub
 
     Private Sub PrintPreview_Click(sender As Object, e As EventArgs) Handles RibbonButton3.Click
-        'Dim prnDialog As New PrintDialog()
+
         Printview.Document = prntDoc
         Printview.ShowDialog()
-        ' Optional Dialog:    
-        'Dim r As DialogResult = prnDialog.ShowDialog
-        'If r = DialogResult.OK Then    
-        ' prntDoc.Print()
-        'End If    
+
     End Sub
 
     Friend WithEvents prntDoc As New PrintDocument()
