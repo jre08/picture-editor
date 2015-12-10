@@ -51,6 +51,7 @@ Public Class Form1
 
         Next
         ListView1.LargeImageList = ImageList1
+        ListView1.Items.Item(0).Selected = True
         srcBmp.SelectActiveFrame(FrameDimension.Page, 0)
         PictureBox1.Image = ResizeImage(srcBmp, New Size(PictureBox1.Width, PictureBox1.Height))
 
@@ -115,8 +116,8 @@ Public Class Form1
             For Each item As ListViewItem In ListView1.SelectedItems()
                 srcBmp.SelectActiveFrame(FrameDimension.Page, item.ImageIndex)
                 'PictureBox1.Image = ResizeImage(srcBmp, New Size(PictureBox1.Width, PictureBox1.Height))
-                PictureBox1.Width = picsizew(srcBmp)
-                PictureBox1.Height = picsizeh(srcBmp)
+                PictureBox1.Width = srcBmp.Width
+                PictureBox1.Height = srcBmp.Height
                 PictureBox1.Image = srcBmp
 
             Next
@@ -334,6 +335,47 @@ Public Class Form1
 
     End Sub
 
+    Private Sub Editmode_change() Handles Rbn_ck_Editmode.CheckBoxCheckChanged
+        If Rbn_ck_Editmode.Checked = True Then
+            If importeddir = False And importedpdf = False Then
+                For Each item As ListViewItem In ListView1.SelectedItems()
+                    srcBmp.SelectActiveFrame(FrameDimension.Page, item.ImageIndex)
+                    'PictureBox1.Image = ResizeImage(srcBmp, New Size(PictureBox1.Width, PictureBox1.Height))
+                    PictureBox1.Width = srcBmp.Width
+                    PictureBox1.Height = srcBmp.Height
+                    PictureBox1.Image = srcBmp
+
+                Next
+
+            ElseIf importedpdf = True Then
+
+
+
+            Else
+
+
+
+
+                For Each item As ListViewItem In ListView1.SelectedItems()
+                    Dim folder As String = dirPath.Text
+                    filename = System.IO.Path.Combine(folder, item.Text)
+                    fs = File.Open(filename, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite)
+                    srcBmp = CType(Bitmap.FromStream(fs), Bitmap)
+                    resized = New Bitmap(srcBmp, srcBmp.Width, srcBmp.Height)
+
+
+
+                Next
+            End If
+
+        ElseIf Rbn_ck_Editmode.Checked = False Then
+            PictureBox1.Width = 667
+            PictureBox1.Height = 771
+
+
+        End If
+    End Sub
+
     Friend WithEvents prntDoc As New PrintDocument()
 
     Private Sub prntDoc_PrintPage(ByVal sender As Object, ByVal e As System.Drawing.Printing.PrintPageEventArgs) Handles prntDoc.PrintPage
@@ -347,7 +389,9 @@ Public Class Form1
     End Sub
 
 
-
+    Sub form2show() Handles RibbonButton6.Click
+        Form2.Show()
+    End Sub
 
 
 End Class
