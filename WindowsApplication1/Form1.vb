@@ -220,11 +220,16 @@ Public Class Form1
 
 
             For Each item As ListViewItem In ListView1.SelectedItems()
-                Dim folder As String = dirPath.Text
-                filename = System.IO.Path.Combine(folder, item.Text)
-                fs = File.Open(filename, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite)
-                srcBmp = CType(Bitmap.FromStream(fs), Bitmap)
-                resized = New Bitmap(srcBmp, srcBmp.Width, srcBmp.Height)
+                srcBmp.SelectActiveFrame(FrameDimension.Page, item.ImageIndex)
+                'PictureBox1.Image = ResizeImage(srcBmp, New Size(PictureBox1.Width, PictureBox1.Height))
+                PictureBox1.Width = srcBmp.Width
+                PictureBox1.Height = srcBmp.Height
+                PictureBox1.Image = srcBmp
+                'Dim folder As String = dirPath.Text
+                'filename = System.IO.Path.Combine(folder, item.Text)
+                'fs = File.Open(filename, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite)
+                'srcBmp = CType(Bitmap.FromStream(fs), Bitmap)
+                'resized = New Bitmap(srcBmp, srcBmp.Width, srcBmp.Height)
 
 
 
@@ -343,12 +348,30 @@ Public Class Form1
             'ImageList1.Images.Add(i, resized)
             'i += 1
         Next
+
+        'Add tiff frames to image list for list view //  select frame from listview
+        fs = File.Open("temp.tiff", FileMode.Open, FileAccess.ReadWrite)
+        srcBmp = CType(Bitmap.FromStream(fs), Bitmap)
+        totalPages = CInt(srcBmp.GetFrameCount(FrameDimension.Page) - 1)
+
+        For i = 0 To totalPages
+            srcBmp.SelectActiveFrame(FrameDimension.Page, i)
+            resized = New Bitmap(srcBmp, srcBmp.Width, srcBmp.Height)
+            ListView1.Items.Add(Str(i), "Page" & Str(i + 1), i)
+            ImageList1.Images.Add(i, resized)
+
+        Next
+        ListView1.LargeImageList = ImageList1
+        ListView1.Items.Item(0).Selected = True
+        srcBmp.SelectActiveFrame(FrameDimension.Page, 0)
+        PictureBox1.Image = ResizeImage(srcBmp, New Size(PictureBox1.Width, PictureBox1.Height))
+
         dirPath.Text = ImportDirDialog.SelectedPath
         importeddir = True
     End Sub
 
 
-
+#Region "Functions"
     Public Shared Function ResizeImage(ByVal image As Image,
   ByVal size As Size, Optional ByVal preserveAspectRatio As Boolean = True) As Image
         Dim newWidth As Integer
@@ -385,6 +408,8 @@ Public Class Form1
         pich = pic.Height
         Return pich
     End Function
+
+#End Region
 
 
 
