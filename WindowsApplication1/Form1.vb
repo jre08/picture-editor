@@ -393,28 +393,29 @@ Public Class Form1
         Dim di As DirectoryInfo = New DirectoryInfo(ImportDirDialog.SelectedPath)
 
 
-        For Each fi In di.EnumerateFiles("*.jpg")
-
-            'Dim filename As String = "temp.tiff"
-            'fs = File.Open(fi.FullName, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite)
-            'srcBmp = CType(Bitmap.FromStream(fs), Bitmap)
-            'resized = New Bitmap(srcBmp, srcBmp.Width, srcBmp.Height)
-            'SaveAddTiff(resized, filename)
-            addimage(fi.FullName)
+        For Each fi In di.GetFiles
+            If fi.Extension = ".gif" Then
+                Dim filename As String = "temp.tiff"
+                fs = File.Open(fi.FullName, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite)
+                srcBmp = CType(Bitmap.FromStream(fs), Bitmap)
+                resized = New Bitmap(srcBmp, srcBmp.Width, srcBmp.Height)
+                SaveAddTiff(resized, filename)
+                'addimage(fi.FullName)
+            End If
         Next
 
-        ''Add tiff frames to image list for list view //  select frame from listview
-        'fs = File.Open("temp.tiff", FileMode.Open, FileAccess.ReadWrite)
-        'srcBmp = CType(Bitmap.FromStream(fs), Bitmap)
-        'totalPages = CInt(srcBmp.GetFrameCount(FrameDimension.Page) - 1)
+        'Add tiff frames to image list for list view //  select frame from listview
+        fs = File.Open("temp.tiff", FileMode.Open, FileAccess.ReadWrite)
+        srcBmp = CType(Bitmap.FromStream(fs), Bitmap)
+        totalPages = CInt(srcBmp.GetFrameCount(FrameDimension.Page) - 1)
 
-        'For i = 0 To totalPages
-        '    srcBmp.SelectActiveFrame(FrameDimension.Page, i)
-        '    resized = New Bitmap(srcBmp, srcBmp.Width, srcBmp.Height)
-        '    ListView1.Items.Add(Str(i), "Page" & Str(i + 1), i)
-        '    ImageList1.Images.Add(i, resized)
+        For i = 0 To totalPages
+            srcBmp.SelectActiveFrame(FrameDimension.Page, i)
+            resized = New Bitmap(srcBmp, srcBmp.Width, srcBmp.Height)
+            ListView1.Items.Add(Str(i), "Page" & Str(i + 1), i)
+            ImageList1.Images.Add(i, resized)
 
-        'Next
+        Next
 
         ListView1.Items.Item(0).Selected = True
         srcBmp.SelectActiveFrame(FrameDimension.Page, 0)
