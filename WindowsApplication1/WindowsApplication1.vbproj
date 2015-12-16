@@ -164,6 +164,9 @@
   <ItemGroup>
     <Content Include="Assembly\PdfSharp.dll" />
     <Content Include="Assembly\System.Windows.Forms.Ribbon35.dll" />
+    <Content Include="Resources\back.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Resources\icon_home.gif" />
     <None Include="Resources\icon_component.gif" />
     <None Include="Resources\icon_attachment.gif" />

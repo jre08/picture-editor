@@ -47,24 +47,28 @@ Partial Class Form1
         Me.RibbonPanel2 = New System.Windows.Forms.RibbonPanel()
         Me.RibbonButton4 = New System.Windows.Forms.RibbonButton()
         Me.RibbonPanel3 = New System.Windows.Forms.RibbonPanel()
+        Me.rbn_btn_closeimg = New System.Windows.Forms.RibbonButton()
         Me.Rbn_ck_Editmode = New System.Windows.Forms.RibbonCheckBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Ribbon1 = New System.Windows.Forms.Ribbon()
         Me.RibbonOrbMenuItem3 = New System.Windows.Forms.RibbonOrbMenuItem()
         Me.RibbonOrbOptionButton2 = New System.Windows.Forms.RibbonOrbOptionButton()
+        Me.RibbonButton6 = New System.Windows.Forms.RibbonButton()
         Me.RibbonOrbOptionButton1 = New System.Windows.Forms.RibbonOrbOptionButton()
         Me.RibbonOrbRecentItem1 = New System.Windows.Forms.RibbonOrbRecentItem()
         Me.RibbonOrbRecentItem2 = New System.Windows.Forms.RibbonOrbRecentItem()
         Me.RibbonOrbMenuItem1 = New System.Windows.Forms.RibbonOrbMenuItem()
         Me.RibbonOrbMenuItem2 = New System.Windows.Forms.RibbonOrbMenuItem()
-        Me.RibbonButton6 = New System.Windows.Forms.RibbonButton()
+        Me.ListView2 = New System.Windows.Forms.ListView()
+        Me.ImageList2 = New System.Windows.Forms.ImageList(Me.components)
         Me.StatusStrip1.SuspendLayout()
         Me.NaviBar1.SuspendLayout()
         Me.NaviBand1.ClientArea.SuspendLayout()
         Me.NaviBand1.SuspendLayout()
         CType(Me.NaviGroup1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.NaviGroup1.SuspendLayout()
+        Me.NaviBand2.ClientArea.SuspendLayout()
         Me.NaviBand2.SuspendLayout()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -76,11 +80,12 @@ Partial Class Form1
         'ImageList1
         '
         Me.ImageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth24Bit
-        Me.ImageList1.ImageSize = New System.Drawing.Size(128, 128)
+        Me.ImageList1.ImageSize = New System.Drawing.Size(256, 256)
         Me.ImageList1.TransparentColor = System.Drawing.Color.Transparent
         '
         'ListView1
         '
+        Me.ListView1.LargeImageList = Me.ImageList1
         Me.ListView1.Location = New System.Drawing.Point(6, 25)
         Me.ListView1.Name = "ListView1"
         Me.ListView1.Size = New System.Drawing.Size(219, 599)
@@ -118,7 +123,7 @@ Partial Class Form1
         '
         'NaviBar1
         '
-        Me.NaviBar1.ActiveBand = Me.NaviBand1
+        Me.NaviBar1.ActiveBand = Me.NaviBand2
         Me.NaviBar1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.NaviBar1.Controls.Add(Me.NaviBand1)
@@ -139,13 +144,13 @@ Partial Class Form1
         Me.NaviBand1.ClientArea.LayoutStyle = Guifreaks.Navisuite.NaviLayoutStyle.StyleFromOwner
         Me.NaviBand1.ClientArea.Location = New System.Drawing.Point(0, 3)
         Me.NaviBand1.ClientArea.Name = "ClientArea"
-        Me.NaviBand1.ClientArea.Size = New System.Drawing.Size(239, 634)
+        Me.NaviBand1.ClientArea.Size = New System.Drawing.Size(1, 1)
         Me.NaviBand1.ClientArea.TabIndex = 0
         Me.NaviBand1.LargeImageIndex = 0
         Me.NaviBand1.LayoutStyle = Guifreaks.Navisuite.NaviLayoutStyle.StyleFromOwner
         Me.NaviBand1.Location = New System.Drawing.Point(1, 27)
         Me.NaviBand1.Name = "NaviBand1"
-        Me.NaviBand1.Size = New System.Drawing.Size(239, 634)
+        Me.NaviBand1.Size = New System.Drawing.Size(0, 0)
         Me.NaviBand1.SmallImageIndex = 0
         Me.NaviBand1.TabIndex = 3
         '
@@ -168,16 +173,17 @@ Partial Class Form1
         '
         'NaviBand2.ClientArea
         '
+        Me.NaviBand2.ClientArea.Controls.Add(Me.ListView2)
         Me.NaviBand2.ClientArea.LayoutStyle = Guifreaks.Navisuite.NaviLayoutStyle.StyleFromOwner
         Me.NaviBand2.ClientArea.Location = New System.Drawing.Point(2, 3)
         Me.NaviBand2.ClientArea.Name = "ClientArea"
-        Me.NaviBand2.ClientArea.Size = New System.Drawing.Size(1, 1)
+        Me.NaviBand2.ClientArea.Size = New System.Drawing.Size(239, 634)
         Me.NaviBand2.ClientArea.TabIndex = 0
         Me.NaviBand2.LargeImageIndex = 0
         Me.NaviBand2.LayoutStyle = Guifreaks.Navisuite.NaviLayoutStyle.StyleFromOwner
         Me.NaviBand2.Location = New System.Drawing.Point(1, 27)
         Me.NaviBand2.Name = "NaviBand2"
-        Me.NaviBand2.Size = New System.Drawing.Size(0, 0)
+        Me.NaviBand2.Size = New System.Drawing.Size(239, 634)
         Me.NaviBand2.SmallImageIndex = 0
         Me.NaviBand2.TabIndex = 5
         '
@@ -235,8 +241,15 @@ Partial Class Form1
         '
         'RibbonPanel3
         '
+        Me.RibbonPanel3.Items.Add(Me.rbn_btn_closeimg)
         Me.RibbonPanel3.Items.Add(Me.Rbn_ck_Editmode)
         Me.RibbonPanel3.Text = "Edit Image"
+        '
+        'rbn_btn_closeimg
+        '
+        Me.rbn_btn_closeimg.Image = Global.PictureBoxPractice.My.Resources.Resources.action_stop
+        Me.rbn_btn_closeimg.SmallImage = Global.PictureBoxPractice.My.Resources.Resources.action_stop
+        Me.rbn_btn_closeimg.Text = "Close Image"
         '
         'Rbn_ck_Editmode
         '
@@ -306,6 +319,13 @@ Partial Class Form1
         Me.RibbonOrbOptionButton2.SmallImage = CType(resources.GetObject("RibbonOrbOptionButton2.SmallImage"), System.Drawing.Image)
         Me.RibbonOrbOptionButton2.Text = "Close"
         '
+        'RibbonButton6
+        '
+        Me.RibbonButton6.Image = Global.PictureBoxPractice.My.Resources.Resources.comment
+        Me.RibbonButton6.MaxSizeMode = System.Windows.Forms.RibbonElementSizeMode.Compact
+        Me.RibbonButton6.SmallImage = Global.PictureBoxPractice.My.Resources.Resources.comment
+        Me.RibbonButton6.Text = "RibbonButton6"
+        '
         'RibbonOrbOptionButton1
         '
         Me.RibbonOrbOptionButton1.Image = Global.PictureBoxPractice.My.Resources.Resources.action_stop
@@ -338,12 +358,22 @@ Partial Class Form1
         Me.RibbonOrbMenuItem2.SmallImage = CType(resources.GetObject("RibbonOrbMenuItem2.SmallImage"), System.Drawing.Image)
         Me.RibbonOrbMenuItem2.Text = "RibbonOrbMenuItem2"
         '
-        'RibbonButton6
+        'ListView2
         '
-        Me.RibbonButton6.Image = Global.PictureBoxPractice.My.Resources.Resources.comment
-        Me.RibbonButton6.MaxSizeMode = System.Windows.Forms.RibbonElementSizeMode.Compact
-        Me.RibbonButton6.SmallImage = Global.PictureBoxPractice.My.Resources.Resources.comment
-        Me.RibbonButton6.Text = "RibbonButton6"
+        Me.ListView2.LargeImageList = Me.ImageList2
+        Me.ListView2.Location = New System.Drawing.Point(1, 0)
+        Me.ListView2.Name = "ListView2"
+        Me.ListView2.Size = New System.Drawing.Size(224, 511)
+        Me.ListView2.SmallImageList = Me.ImageList2
+        Me.ListView2.TabIndex = 0
+        Me.ListView2.UseCompatibleStateImageBehavior = False
+        Me.ListView2.View = System.Windows.Forms.View.SmallIcon
+        '
+        'ImageList2
+        '
+        Me.ImageList2.ColorDepth = System.Windows.Forms.ColorDepth.Depth24Bit
+        Me.ImageList2.ImageSize = New System.Drawing.Size(256, 256)
+        Me.ImageList2.TransparentColor = System.Drawing.Color.Transparent
         '
         'Form1
         '
@@ -364,6 +394,7 @@ Partial Class Form1
         Me.NaviBand1.ResumeLayout(False)
         CType(Me.NaviGroup1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.NaviGroup1.ResumeLayout(False)
+        Me.NaviBand2.ClientArea.ResumeLayout(False)
         Me.NaviBand2.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
@@ -405,4 +436,7 @@ Partial Class Form1
     Friend WithEvents Rbn_ck_Editmode As RibbonCheckBox
     Friend WithEvents Panel1 As Panel
     Friend WithEvents RibbonButton6 As RibbonButton
+    Friend WithEvents rbn_btn_closeimg As RibbonButton
+    Friend WithEvents ListView2 As ListView
+    Friend WithEvents ImageList2 As ImageList
 End Class
