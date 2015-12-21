@@ -90,6 +90,7 @@ Partial Class Form1
         Me.ListView1.Location = New System.Drawing.Point(6, 25)
         Me.ListView1.Name = "ListView1"
         Me.ListView1.Size = New System.Drawing.Size(219, 599)
+        Me.ListView1.SmallImageList = Me.ImageList1
         Me.ListView1.TabIndex = 2
         Me.ListView1.UseCompatibleStateImageBehavior = False
         '
