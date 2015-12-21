@@ -35,10 +35,10 @@ Public Class Form1
     Dim resized As Image
     Dim img As Image
     Dim tempdi As DirectoryInfo
-    'Dim img As Drawing.Image
     Public filename As String
+    Dim tempfile As String = "temp.tif"
     Dim srcBmpfrm As Bitmap
-    Dim tempfile As String = "temp.tiff"
+    Dim ListNum As Integer = 0
     Friend WithEvents prntDoc As New PrintDocument()
 
 #End Region
@@ -53,27 +53,29 @@ Public Class Form1
 
     Public Sub OpenFile_FileOk(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles OpenFile.FileOk
 
-        'fs = File.Open(OpenFile.FileName, FileMode.Open, FileAccess.ReadWrite)
-        'srcBmp = CType(Bitmap.FromStream(fs), Bitmap)
-        'totalPages = CInt(srcBmp.GetFrameCount(FrameDimension.Page) - 1)
+        fs = File.Open(OpenFile.FileName, FileMode.Open, FileAccess.ReadWrite)
+        srcBmp = CType(Bitmap.FromStream(fs), Bitmap)
+        totalPages = CInt(srcBmp.GetFrameCount(FrameDimension.Page) - 1)
 
-        'For i = 0 To totalPages
-        '    srcBmp.SelectActiveFrame(FrameDimension.Page, i)
-        '    resized = New Bitmap(srcBmp, srcBmp.Width, srcBmp.Height)
-        '    ListView1.Items.Add(Str(i), "Page" & Str(i + 1), i)
-        '    ImageList1.Images.Add(i, resized)
+        For i = 0 To totalPages
+            srcBmp.SelectActiveFrame(FrameDimension.Page, i)
+            resized = New Bitmap(srcBmp, srcBmp.Width, srcBmp.Height)
+            addimage(resized)
+            '    ListView1.Items.Add(Str(i), "Page" & Str(i + 1), i)
+            '    ImageList1.Images.Add(i, resized)
 
-        'Next
+        Next
         'ListView1.LargeImageList = ImageList1
         'ListView1.Items.Item(0).Selected = True
         'srcBmp.SelectActiveFrame(FrameDimension.Page, 0)
         'PictureBox1.Image = ResizeImage(srcBmp, New Size(PictureBox1.Width, PictureBox1.Height))
 
 
-        addimage(OpenFile.FileName)
+        'addimage(OpenFile.FileName)
         ListView1.Items.Item(0).Selected = True
-        'srcBmp.SelectActiveFrame(FrameDimension.Page, 0)
-        'PictureBox1.Image = ResizeImage(srcBmp, New Size(PictureBox1.Width, PictureBox1.Height))
+
+
+
 
     End Sub
 
@@ -162,9 +164,9 @@ Public Class Form1
                 For Each item As ListViewItem In ListView1.SelectedItems()
                     'srcBmpfr.SelectActiveFrame(FrameDimension.Page, item.ImageIndex)
                     'PictureBox1.Image = ResizeImage(srcBmp, New Size(PictureBox1.Width, PictureBox1.Height))
-                    PictureBox1.Width = srcBmpfrm.Width
-                    PictureBox1.Height = srcBmpfrm.Height
-                    PictureBox1.Image = srcBmpfrm
+                    'PictureBox1.Width = srcBmpfrm.Width
+                    'PictureBox1.Height = srcBmpfrm.Height
+                    'PictureBox1.Image = srcBmpfrm
 
                 Next
 
@@ -199,8 +201,8 @@ Public Class Form1
         ListView1.Items.Clear()
         PictureBox1.Image = New Bitmap(Image.FromFile("back.jpg"))
         srcBmp.Dispose()
-        fs.Dispose()
-        My.Computer.FileSystem.DeleteFile("temp.tiff")
+        'fs.Dispose()
+        ' My.Computer.FileSystem.DeleteFile("temp.tiff")
     End Sub
 
     Private Sub SaveEdit() Handles rbn_btn_svedit.Click
@@ -221,12 +223,21 @@ Public Class Form1
     Private Sub ListView1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListView1.SelectedIndexChanged
         If importedpdf = False Then
             For Each item As ListViewItem In ListView1.SelectedItems()
-                srcBmpfrm = Bitmap.FromFile(Application.StartupPath & "\temp\temp" & item.ImageIndex & ".tif")
+                'Debug.Print(item.Index)
+                ListNum = item.Index
+                srcBmp = Nothing
+                'srcBmp.Dispose()
+                'fs = Nothing
+                fs.Dispose()
+                fs = File.Open(Application.StartupPath & "\temp\temp" & ListNum & ".tif", FileMode.Open, FileAccess.ReadWrite)
+                srcBmp = CType(Bitmap.FromStream(fs), Bitmap)
+                'srcBmpfrm = Bitmap.FromFile(Application.StartupPath & "\temp\temp" & item.Index & ".tif")
                 'srcBmp.SelectActiveFrame(FrameDimension.Page, item.ImageIndex)
                 'PictureBox1.Image = ResizeImage(srcBmp, New Size(PictureBox1.Width, PictureBox1.Height))
-                PictureBox1.Width = srcBmpfrm.Width
-                PictureBox1.Height = srcBmpfrm.Height
-                PictureBox1.Image = srcBmpfrm
+                PictureBox1.Width = srcBmp.Width
+                PictureBox1.Height = srcBmp.Height
+                PictureBox1.Image = srcBmp
+
 
             Next
 
@@ -236,21 +247,21 @@ Public Class Form1
 
 
 
-            For Each item As ListViewItem In ListView1.SelectedItems()
-                srcBmp.SelectActiveFrame(FrameDimension.Page, item.ImageIndex)
-                'PictureBox1.Image = ResizeImage(srcBmp, New Size(PictureBox1.Width, PictureBox1.Height))
-                PictureBox1.Width = srcBmp.Width
-                PictureBox1.Height = srcBmp.Height
-                PictureBox1.Image = srcBmp
-                'Dim folder As String = dirPath.Text
-                'filename = System.IO.Path.Combine(folder, item.Text)
-                'fs = File.Open(filename, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite)
-                'srcBmp = CType(Bitmap.FromStream(fs), Bitmap)
-                'resized = New Bitmap(srcBmp, srcBmp.Width, srcBmp.Height)
+            'For Each item As ListViewItem In ListView1.SelectedItems()
+            '    srcBmp.SelectActiveFrame(FrameDimension.Page, item.ImageIndex)
+            '    'PictureBox1.Image = ResizeImage(srcBmp, New Size(PictureBox1.Width, PictureBox1.Height))
+            '    PictureBox1.Width = srcBmp.Width
+            '    PictureBox1.Height = srcBmp.Height
+            '    PictureBox1.Image = srcBmp
+            'Dim folder As String = dirPath.Text
+            'filename = System.IO.Path.Combine(folder, item.Text)
+            'fs = File.Open(filename, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite)
+            'srcBmp = CType(Bitmap.FromStream(fs), Bitmap)
+            'resized = New Bitmap(srcBmp, srcBmp.Width, srcBmp.Height)
 
 
 
-            Next
+            'Next
 
             'PictureBox1.Image = ResizeImage(srcBmp, New Size(PictureBox1.Width, PictureBox1.Height))
             If Rbn_ck_Editmode.Checked = True Then
@@ -332,6 +343,7 @@ Public Class Form1
             PictureBox1.Image = objNewBmp
             'cboFrameEdit.Items.Add(curF)
             g.Dispose()
+            objBmp.Dispose()
             'objNewBmp.Dispose()
 
             rubberBanding = False
@@ -353,41 +365,41 @@ Public Class Form1
     Dim srcimg As Bitmap
 
     Sub savemouse()
+
+
         ''Saves the picturebox image in a temp folder
-        Dim objNewBmp As New Bitmap(PictureBox1.Image)
+
         'Dim filename As String = "temp.tiff"
         'fs.Dispose()
         'fs = File.Open(filename, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite)
         'srcimg = CType(Bitmap.FromStream(fs), Bitmap)
-        'Dim g As Graphics
+        Dim objNewBmp As New Bitmap(PictureBox1.Image)
+        Dim g As Graphics
+        Dim num As Integer
+        For Each item As ListViewItem In ListView1.SelectedItems()
+            ListNum = item.Index
+
+        Next
+        MsgBox(ListNum)
+        ImageList1.Images.Clear()
+        ListView1.Items.Clear()
+        srcBmp = Nothing
+        fs.Dispose()
+        PictureBox1.Image.Dispose()
+
+        My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\temp\temp" & ListNum & ".tif")
 
         g = Graphics.FromImage(objNewBmp)
         ''Creats a duplicate image file as bitmap format 
 
         ''Creates an rectagnle on the picture box for visual.
         g = PictureBox1.CreateGraphics
+        objNewBmp.Save(Application.StartupPath & "\temp\temp" & ListNum & ".tif", Imaging.ImageFormat.Tiff)
+        ImgList()
+        'PictureBox1.Image = New Bitmap(Image.FromFile((Application.StartupPath & "\temp\temp" & ListNum & ".tif")))
+        ListView1.Items.Item(ListNum).Selected = True
 
-        'objNewBmp.Save(Application.StartupPath & "\temp\temp" & num & ".tif", Imaging.ImageFormat.Tiff)
-
-        'resized = New Bitmap(objNewBmp, objNewBmp.Width, objNewBmp.Height)
-
-        'ListView1.Items.Add(Str(i), "Page" & Str(i + 1), i)
-        Dim num As Integer
-        For Each item As ListViewItem In ListView1.SelectedItems()
-            num = item.Index
-            'ImageList2.Images.Add(Str(num), resized)
-            'ListView2.Items.Add(Str(num), "num", Str(num))
-            'PictureBox1.Image = ResizeImage(srcBmp, New Size(PictureBox1.Width, PictureBox1.Height))
-            ' PictureBox1.Width = srcBmp.Width
-            'PictureBox1.Height = srcBmp.Height
-            'PictureBox1.Image = srcBmp
-            Debug.Print(num)
-            'Next
-        Next
-        ' Debug.Print(srcimg.GetFrameCount(FrameDimension.Page))
-        ImageList1.Images.Clear()
-        My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\temp\temp" & num & ".tif")
-        objNewBmp.Save(Application.StartupPath & "\temp\temp" & num & ".tif", Imaging.ImageFormat.Tiff)
+        'fs.Dispose()
         'For i = 0 To srcBmp.GetFrameCount(FrameDimension.Page) - 1
         '    srcBmp.SelectActiveFrame(FrameDimension.Page, i)
         '    pic = New Bitmap(srcBmp)
@@ -408,6 +420,11 @@ Public Class Form1
 
 
 
+
+
+
+
+#Region "Functions"
 
     Sub ImportDir()
 
@@ -447,28 +464,20 @@ Public Class Form1
         importeddir = True
     End Sub
 
-
-#Region "Functions"
-
-
-    Sub addimage(imagename As String)
+    Sub addimage(img As Image)
         'Dim filename As String = "temp.tiff"
         'fs = File.Open(imagename, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite)
-        srcBmp = CType(Bitmap.FromFile(imagename), Bitmap)
-        img = srcBmp
+        'srcBmp = CType(Bitmap.FromFile(imagename), Bitmap)
+        'img = srcBmp
         tempdi = New DirectoryInfo(Application.StartupPath & "\temp\")
         Dim num As Integer = tempdi.GetFiles.Count
         'Debug.Print(Application.StartupPath)
         'ListView1.Items.Add(Str(num), "Page" & Str(num + 1), num)
         img.Save(Application.StartupPath & "\temp\temp" & num & ".tif", Imaging.ImageFormat.Tiff)
-        srcBmp.Dispose()
+        ' srcBmp.Dispose()
+        img.Dispose()
+        ImgList()
 
-        num = 0
-        For Each fi In tempdi.GetFiles
-            ListView1.Items.Add(Str(num + 1), "Page" & Str(num + 1), num + 1)
-            ImageList1.Images.Add(num + 1, CType(Bitmap.FromFile(Application.StartupPath & "\temp\temp" & num & ".tif"), Bitmap))
-            num += 1
-        Next
 
         'resized = New Bitmap(srcBmp, srcBmp.Width, srcBmp.Height)
 
@@ -488,6 +497,23 @@ Public Class Form1
         'Next
     End Sub
 
+
+    Sub ImgList()
+        ImageList1.Images.Clear()
+        srcBmp = Nothing
+        tempdi = New DirectoryInfo(Application.StartupPath & "\temp\")
+        Dim num = 0
+        For i = 0 To tempdi.GetFiles.Count - 1
+            num = i
+            fs = File.Open(Application.StartupPath & "\temp\temp" & num & ".tif", FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite)
+            srcBmp = CType(Bitmap.FromStream(fs), Bitmap)
+            ListView1.Items.Add(Str(num), "Page" & Str(num + 1), num)
+            ImageList1.Images.Add(num + 1, srcBmp)
+            fs.Dispose()
+
+            num += 1
+        Next
+    End Sub
     Public Shared Function ResizeImage(ByVal image As Image,
   ByVal size As Size, Optional ByVal preserveAspectRatio As Boolean = True) As Image
         Dim newWidth As Integer
